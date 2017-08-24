@@ -15,7 +15,7 @@ export function init(opts) {
         pageview();
     }
 
-    $(`a[href]:not(.no-tracking,[href=""],[href^="/"]:not([href^="//"]),[href^="${location.origin}"]),[data-track]:not([data-track=""])`).not(options.exclude).off('mousedown click', click).on('mousedown click', click);
+    $(`a[href]:not(.no-gtracking,[href=""],[href^="/"]:not([href^="//"]),[href^="${location.origin}"]),[data-gtrack]:not([data-gtrack=""])`).not(options.exclude).off('mousedown click', click).on('mousedown click', click);
 }
 
 export function pageview(url) {
@@ -41,7 +41,7 @@ function click(e) {
         let item = $(e.currentTarget);
         let category, action, label, value, callback;
 
-        let track = item.attr('data-track');
+        let track = item.attr('data-gtrack');
         if (track) {
             [category, action, label, value] = track.split(',');
 

@@ -1,5 +1,5 @@
 # GTrack
-Automatically track outbound links, mailto:, tel: and hashtags. Track custom events with the [data-link] attribute. Includes default Google Analytics pageviews.
+Automatically track outbound links, mailto:, tel: and hashtags. Track custom events with the [data-glink] attribute. Includes default Google Analytics pageviews.
 
 ### Installation
 ```
@@ -41,13 +41,20 @@ GTrack.event(category, action, label, value, callback);
 
 ### HTML
 ```html
-Track "Test" hashtag as event
+Automatic inbound and outbound tracking (no extra class required)
+<a href="/contact">Contact</a>
+<a href="https://wearejust.com/">Just</a>
+
+Track 'Test' as 'anchor' event
 <a href="#test">Test</a>
 
+Track 'emre.koc@wearejust.com' as 'mail' event
+<a href="mailto:emre.koc@wearejust.com">Mail</a>
+
 Track custom event, with optional category, action, label and value
-<div data-track="category,action,label,value">Custom</div>
+<button data-gtrack="category,action,label,value">Custom</button>
 
 Disable tracking
-<a href="https://wearejust.com/" class="no-tracking">Just</a>
+<a href="https://wearejust.com/" class="no-gtracking">Just</a>
 ```
 

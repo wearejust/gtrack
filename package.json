@@ -1,7 +1,7 @@
 {
     "name": "@wearejust/gtrack",
-    "version": "1.0.1",
-    "description": "Google Analytics wrapper",
+    "version": "1.0.2",
+    "description": "Automatic Google Analytics tracking",
     "main": "dist/gtrack.js",
     "license": "MIT",
     "files": [

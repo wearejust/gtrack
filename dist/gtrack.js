@@ -1,8 +1,8 @@
 /** 
 * @wearejust/gtrack 
-* Google Analytics wrapper 
+* Automatic Google Analytics tracking 
 * 
-* @version 1.0.1 
+* @version 1.0.2 
 * @author Emre Koc <emre.koc@wearejust.com> 
 */
 'use strict';
@@ -39,7 +39,7 @@ function init(opts) {
         pageview();
     }
 
-    $('a[href]:not(.no-tracking,[href=""],[href^="/"]:not([href^="//"]),[href^="' + location.origin + '"]),[data-track]:not([data-track=""])').not(options.exclude).off('mousedown click', click).on('mousedown click', click);
+    $('a[href]:not(.no-gtracking,[href=""],[href^="/"]:not([href^="//"]),[href^="' + location.origin + '"]),[data-gtrack]:not([data-gtrack=""])').not(options.exclude).off('mousedown click', click).on('mousedown click', click);
 }
 
 function pageview(url) {
@@ -69,7 +69,7 @@ function click(e) {
             value = void 0,
             callback = void 0;
 
-        var track = item.attr('data-track');
+        var track = item.attr('data-gtrack');
         if (track) {
             var _track$split = track.split(',');
 
