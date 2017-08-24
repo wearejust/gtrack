@@ -2,7 +2,7 @@
 * @wearejust/gtrack 
 * Google Analytics wrapper 
 * 
-* @version 1.0.0 
+* @version 1.0.1 
 * @author Emre Koc <emre.koc@wearejust.com> 
 */
 'use strict';
@@ -33,6 +33,7 @@ var options = {
 function init(opts) {
     if (!created) {
         created = true;
+        if (typeof opts == 'string') opts = { id: opts };
         options = _extends(options, opts || {});
         ga('create', options.id, 'auto');
         pageview();

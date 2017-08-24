@@ -9,6 +9,7 @@ let options = {
 export function init(opts) {
     if (!created) {
         created = true;
+        if (typeof(opts) == 'string') opts = { id: opts };
         options = Object.assign(options, opts || {});
         ga('create', options.id, 'auto');
         pageview();
