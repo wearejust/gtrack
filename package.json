@@ -1,0 +1,34 @@
+{
+    "name": "@wearejust/gtrack",
+    "version": "1.0.0",
+    "description": "Google Analytics wrapper",
+    "main": "dist/gtrack.js",
+    "license": "MIT",
+    "files": [
+        "dist",
+        "src"
+    ],
+    "keywords": [
+        "gtrack",
+        "google",
+        "analytics"
+    ],
+    "author": {
+        "name": "Emre Koc",
+        "email": "emre.koc@wearejust.com",
+        "url": "https://github.com/wearejust"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wearejust/gtrack"
+    },
+    "devDependencies": {
+        "babel-preset-es2015-ie": "^6.7.0",
+        "gulp": "^3.9.1",
+        "gulp-babel": "^6.1.2",
+        "gulp-header": "^1.8.8"
+    },
+    "dependencies": {
+        "jquery": "^3.2.1"
+    }
+}
