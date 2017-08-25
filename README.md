@@ -37,6 +37,9 @@ GTrack.pageview(custom_url, callback);
 
 // Track event with category and cation, and optional label, value and callback
 GTrack.event(category, action, label, value, callback);
+
+// Parse items on the page again (used for AJAX calls for example)
+GTrack.parse();
 ```
 
 ### HTML

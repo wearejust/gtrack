@@ -2,7 +2,7 @@
 * @wearejust/gtrack 
 * Automatic Google Analytics tracking 
 * 
-* @version 1.0.3 
+* @version 1.0.4 
 * @author Emre Koc <emre.koc@wearejust.com> 
 */
 'use strict';
@@ -16,6 +16,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 exports.init = init;
+exports.parse = parse;
 exports.pageview = pageview;
 exports.event = event;
 (function (i, s, o, g, r, a, m) {
@@ -24,22 +25,23 @@ exports.event = event;
     }, i[r].l = 1 * new Date();a = s.createElement(o), m = s.getElementsByTagName(o)[0];a.async = 1;a.src = g;m.parentNode.insertBefore(a, m);
 })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-var created = void 0;
 var options = {
     id: 'UA-XXXXXXXX-X',
     exclude: ''
 };
 
 function init(opts) {
-    if (!created) {
-        created = true;
-        if (typeof opts == 'string') opts = { id: opts };
-        options = _extends(options, opts || {});
-        ga('create', options.id, 'auto');
-        pageview();
-    }
+    if (typeof opts == 'string') opts = { id: opts };
+    options = _extends(options, opts || {});
+    ga('create', options.id, 'auto');
+    pageview();
+    parse();
+}
 
-    $('a[href]:not(.no-gtracking,[href=""],[href^="/"]:not([href^="//"]),[href^="' + location.origin + '"]),[data-gtrack]:not([data-gtrack=""])').not(options.exclude).off('mousedown click', click).on('mousedown click', click);
+function parse() {
+    var items = $('a[href]:not(.no-gtracking,[href=""],[href^="/"]:not([href^="//"]),[href^="' + location.origin + '"]),[data-gtrack]:not([data-gtrack=""])').not(options.exclude);
+    items.off('mousedown click', click);
+    items.on('mousedown click', click);
 }
 
 function pageview(url) {

@@ -1,21 +1,22 @@
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-let created;
 let options = {
     id: 'UA-XXXXXXXX-X',
     exclude: ''
 };
 
 export function init(opts) {
-    if (!created) {
-        created = true;
-        if (typeof(opts) == 'string') opts = { id: opts };
-        options = Object.assign(options, opts || {});
-        ga('create', options.id, 'auto');
-        pageview();
-    }
+    if (typeof(opts) == 'string') opts = {id: opts};
+    options = Object.assign(options, opts || {});
+    ga('create', options.id, 'auto');
+    pageview();
+    parse();
+}
 
-    $(`a[href]:not(.no-gtracking,[href=""],[href^="/"]:not([href^="//"]),[href^="${location.origin}"]),[data-gtrack]:not([data-gtrack=""])`).not(options.exclude).off('mousedown click', click).on('mousedown click', click);
+export function parse() {
+    let items = $(`a[href]:not(.no-gtracking,[href=""],[href^="/"]:not([href^="//"]),[href^="${location.origin}"]),[data-gtrack]:not([data-gtrack=""])`).not(options.exclude);
+    items.off('mousedown click', click);
+    items.on('mousedown click', click);
 }
 
 export function pageview(url) {
