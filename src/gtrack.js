@@ -40,6 +40,10 @@ function click(e) {
         }
 
         let item = $(e.currentTarget);
+        if (item.is('[data-gtrack-once]')) {
+            item.off('mousedown click', click);
+        }
+
         let category, action, label, value, callback;
 
         let track = item.attr('data-gtrack');

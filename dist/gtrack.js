@@ -65,6 +65,10 @@ function click(e) {
         }
 
         var item = $(e.currentTarget);
+        if (item.is('[data-gtrack-once]')) {
+            item.off('mousedown click', click);
+        }
+
         var category = void 0,
             action = void 0,
             label = void 0,
