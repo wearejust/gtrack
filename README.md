@@ -58,6 +58,6 @@ Track custom event, with optional category, action, label and value
 <button data-gtrack="Category,Action,Label,value">Custom</button>
 
 Disable tracking
-<a href="https://wearejust.com/" class="no-gtracking">Just</a>
+<a href="https://wearejust.com/" class="no-gtrack">Just</a>
 ```
 

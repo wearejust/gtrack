@@ -2,7 +2,7 @@
 * @wearejust/gtrack 
 * Automatic Google Analytics tracking 
 * 
-* @version 1.0.4 
+* @version 1.0.5 
 * @author Emre Koc <emre.koc@wearejust.com> 
 */
 'use strict';
@@ -39,7 +39,7 @@ function init(opts) {
 }
 
 function parse() {
-    var items = $('a[href]:not(.no-gtracking,[href=""],[href^="/"]:not([href^="//"]),[href^="' + location.origin + '"]),[data-gtrack]:not([data-gtrack=""])').not(options.exclude);
+    var items = $('a[href]:not(.no-gtrack,[href=""],[href^="/"]:not([href^="//"]),[href^="' + location.origin + '"]),[data-gtrack]:not([data-gtrack=""])').not(options.exclude);
     items.off('mousedown click', click);
     items.on('mousedown click', click);
 }

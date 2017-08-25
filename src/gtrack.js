@@ -14,7 +14,7 @@ export function init(opts) {
 }
 
 export function parse() {
-    let items = $(`a[href]:not(.no-gtracking,[href=""],[href^="/"]:not([href^="//"]),[href^="${location.origin}"]),[data-gtrack]:not([data-gtrack=""])`).not(options.exclude);
+    let items = $(`a[href]:not(.no-gtrack,[href=""],[href^="/"]:not([href^="//"]),[href^="${location.origin}"]),[data-gtrack]:not([data-gtrack=""])`).not(options.exclude);
     items.off('mousedown click', click);
     items.on('mousedown click', click);
 }
