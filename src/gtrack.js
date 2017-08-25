@@ -44,7 +44,8 @@ function click(e) {
             item.off('mousedown click', click);
         }
 
-        let category, action, label, value, callback;
+        let category, action, label, value;
+        let url = item.attr('href');
 
         let track = item.attr('data-gtrack');
         if (track) {
@@ -53,7 +54,7 @@ function click(e) {
         } else {
             category = 'Outbound';
             action = 'Click';
-            let url = label = item.attr('href');
+            label = url;
 
             if (label.substr(0, 1) == '#') {
                 category = 'Anchor';
@@ -65,16 +66,14 @@ function click(e) {
                 category = 'Mail';
                 label = label.substr(7);
             }
-
-            callback = function() {
-                if (e.which == 2 || e.ctrlKey || e.metaKey || item.attr('target') == '_blank') {
-                    open(url);
-                } else {
-                    location = url;
-                }
-            }
         }
 
-        event(category, action, label, value, callback);
+        event(category, action, label, value, function() {
+            if (e.which == 2 || e.ctrlKey || e.metaKey || item.attr('target') == '_blank') {
+                open(url);
+            } else {
+                location = url;
+            }
+        });
     }
 }
