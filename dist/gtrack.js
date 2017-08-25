@@ -2,7 +2,7 @@
 * @wearejust/gtrack 
 * Automatic Google Analytics tracking 
 * 
-* @version 1.0.2 
+* @version 1.0.3 
 * @author Emre Koc <emre.koc@wearejust.com> 
 */
 'use strict';
@@ -80,18 +80,18 @@ function click(e) {
             label = _track$split2[2];
             value = _track$split2[3];
         } else {
-            category = 'outbound';
-            action = 'click';
+            category = 'Outbound';
+            action = 'Click';
             var url = label = item.attr('href');
 
             if (label.substr(0, 1) == '#') {
-                category = 'anchor';
+                category = 'Anchor';
                 label = label.substr(1);
             } else if (label.substr(0, 4) == 'tel:') {
-                category = 'tel';
+                category = 'Tel';
                 label = label.substr(4);
             } else if (label.substr(0, 7) == 'mailto:') {
-                category = 'mail';
+                category = 'Mail';
                 label = label.substr(7);
             }
 

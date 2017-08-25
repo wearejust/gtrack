@@ -33,9 +33,9 @@ $(function() {
 GTrack.pageview();
 
 // Track custom url
-GTrack.pageview(custom_url);
+GTrack.pageview(custom_url, callback);
 
-// Track event( with optional parameters)
+// Track event with category and cation, and optional label, value and callback
 GTrack.event(category, action, label, value, callback);
 ```
 
@@ -45,14 +45,14 @@ Automatic inbound and outbound tracking (no extra class required)
 <a href="/contact">Contact</a>
 <a href="https://wearejust.com/">Just</a>
 
-Track 'Test' as 'anchor' event
+Track 'Test' as 'Anchor' event
 <a href="#test">Test</a>
 
-Track 'emre.koc@wearejust.com' as 'mail' event
+Track 'emre.koc@wearejust.com' as 'Mail' event
 <a href="mailto:emre.koc@wearejust.com">Mail</a>
 
 Track custom event, with optional category, action, label and value
-<button data-gtrack="category,action,label,value">Custom</button>
+<button data-gtrack="Category,Action,Label,value">Custom</button>
 
 Disable tracking
 <a href="https://wearejust.com/" class="no-gtracking">Just</a>

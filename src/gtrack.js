@@ -46,18 +46,18 @@ function click(e) {
             [category, action, label, value] = track.split(',');
 
         } else {
-            category = 'outbound';
-            action = 'click';
+            category = 'Outbound';
+            action = 'Click';
             let url = label = item.attr('href');
 
             if (label.substr(0, 1) == '#') {
-                category = 'anchor';
+                category = 'Anchor';
                 label = label.substr(1);
             } else  if (label.substr(0, 4) == 'tel:') {
-                category = 'tel';
+                category = 'Tel';
                 label = label.substr(4);
             } else if (label.substr(0, 7) == 'mailto:') {
-                category = 'mail';
+                category = 'Mail';
                 label = label.substr(7);
             }
 
