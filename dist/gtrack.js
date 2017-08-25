@@ -2,7 +2,7 @@
 * @wearejust/gtrack 
 * Automatic Google Analytics tracking 
 * 
-* @version 1.0.5 
+* @version 1.0.7 
 * @author Emre Koc <emre.koc@wearejust.com> 
 */
 'use strict';

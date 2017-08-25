@@ -1,5 +1,5 @@
 # GTrack
-Automatically track outbound links, mailto:, tel: and hashtags. Track custom events with the [data-glink] attribute. Includes default Google Analytics pageviews.
+Automatically track outbound links, mailto:, tel: and hashtags. Track custom events with the [data-gtrack] attribute. Includes default Google Analytics pageviews.
 
 ### Installation
 ```
@@ -35,7 +35,7 @@ GTrack.pageview();
 // Track custom url
 GTrack.pageview(custom_url, callback);
 
-// Track event with category and cation, and optional label, value and callback
+// Track event with category and action, and optional label, value and callback
 GTrack.event(category, action, label, value, callback);
 
 // Parse items on the page again (used for AJAX calls for example)
