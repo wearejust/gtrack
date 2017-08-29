@@ -2,7 +2,7 @@
 * @wearejust/gtrack 
 * Automatic Google Analytics tracking 
 * 
-* @version 1.0.9 
+* @version 1.0.10 
 * @author Emre Koc <emre.koc@wearejust.com> 
 */
 'use strict';
@@ -50,13 +50,10 @@ function pageview(url) {
 }
 
 function event(category, action, label, value, callback) {
-    if ($.isFunction(callback)) {
-        callback = {
-            'transport': 'beacon',
-            'hitCallback': callback
-        };
-    }
-    ga('send', 'event', category, action, label, value, callback);
+    ga('send', 'event', category, action, label, value, {
+        'transport': 'beacon',
+        'hitCallback': callback
+    });
 }
 
 function click(e) {
@@ -73,7 +70,8 @@ function click(e) {
         var category = void 0,
             action = void 0,
             label = void 0,
-            value = void 0;
+            value = void 0,
+            callback = void 0;
         var url = item.attr('href');
 
         var track = item.attr('data-gtrack');
@@ -103,12 +101,14 @@ function click(e) {
             }
         }
 
-        event(category, action, label, value, function () {
-            if (e.which == 2 || e.ctrlKey || e.metaKey || item.attr('target') == '_blank') {
-                open(url);
-            } else {
+        if (e.which == 2 || e.ctrlKey || e.metaKey || item.attr('target') == '_blank') {
+            open(url);
+        } else {
+            callback = function callback() {
                 location = url;
-            }
-        });
+            };
+        }
+
+        event(category, action, label, value, callback);
     }
 }

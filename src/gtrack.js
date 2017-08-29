@@ -25,13 +25,10 @@ export function pageview(url) {
 }
 
 export function event(category, action, label, value, callback) {
-    if ($.isFunction(callback))  {
-        callback = {
-            'transport': 'beacon',
-            'hitCallback': callback
-        }
-    }
-    ga('send', 'event', category, action, label, value, callback);
+    ga('send', 'event', category, action, label, value, {
+        'transport': 'beacon',
+        'hitCallback': callback
+    });
 }
 
 function click(e) {
@@ -45,7 +42,7 @@ function click(e) {
             item.off('mousedown click', click);
         }
 
-        let category, action, label, value;
+        let category, action, label, value, callback;
         let url = item.attr('href');
 
         let track = item.attr('data-gtrack');
@@ -69,12 +66,14 @@ function click(e) {
             }
         }
 
-        event(category, action, label, value, function() {
-            if (e.which == 2 || e.ctrlKey || e.metaKey || item.attr('target') == '_blank') {
-                open(url);
-            } else {
+        if (e.which == 2 || e.ctrlKey || e.metaKey || item.attr('target') == '_blank') {
+            open(url);
+        } else {
+            callback = function() {
                 location = url;
             }
-        });
+        }
+
+        event(category, action, label, value, callback);
     }
 }
