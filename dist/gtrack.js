@@ -2,7 +2,7 @@
 * @wearejust/gtrack 
 * Automatic Google Analytics tracking 
 * 
-* @version 1.0.8 
+* @version 1.0.9 
 * @author Emre Koc <emre.koc@wearejust.com> 
 */
 'use strict';
@@ -34,6 +34,7 @@ function init(opts) {
     if (typeof opts == 'string') opts = { id: opts };
     options = _extends(options, opts || {});
     ga('create', options.id, 'auto');
+    ga('set', 'anonymizeIp', true);
     pageview();
     parse();
 }

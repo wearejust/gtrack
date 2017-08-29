@@ -9,6 +9,7 @@ export function init(opts) {
     if (typeof(opts) == 'string') opts = {id: opts};
     options = Object.assign(options, opts || {});
     ga('create', options.id, 'auto');
+    ga('set', 'anonymizeIp', true);
     pageview();
     parse();
 }
