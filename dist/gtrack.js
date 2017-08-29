@@ -2,7 +2,7 @@
 * @wearejust/gtrack 
 * Automatic Google Analytics tracking 
 * 
-* @version 1.0.10 
+* @version 1.0.11 
 * @author Emre Koc <emre.koc@wearejust.com> 
 */
 'use strict';
@@ -25,22 +25,29 @@ exports.event = event;
     }, i[r].l = 1 * new Date();a = s.createElement(o), m = s.getElementsByTagName(o)[0];a.async = 1;a.src = g;m.parentNode.insertBefore(a, m);
 })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
+var $body = $(document.body);
 var options = {
     id: 'UA-XXXXXXXX-X',
-    exclude: ''
+    exclude: '',
+    parseOnInit: true
 };
 
 function init(opts) {
     if (typeof opts == 'string') opts = { id: opts };
     options = _extends(options, opts || {});
+
     ga('create', options.id, 'auto');
     ga('set', 'anonymizeIp', true);
+
     pageview();
-    parse();
+    if (options.parseOnInit) {
+        parse();
+    }
 }
 
-function parse() {
-    var items = $('a[href]:not(.no-gtrack,[href=""],[href^="/"]:not([href^="//"]),[href^="' + location.origin + '"]),[data-gtrack]:not([data-gtrack=""])').not(options.exclude);
+function parse(container) {
+    if (!container) container = $body;
+    var items = container.find('a[href]:not(.no-gtrack,[href=""],[href^="/"]:not([href^="//"]),[href^="' + location.origin + '"]),[data-gtrack]:not([data-gtrack=""])').not(options.exclude);
     items.off('mousedown click', click);
     items.on('mousedown click', click);
 }

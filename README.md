@@ -21,25 +21,25 @@ var GTrack = require('@wearejust/gtrack');
 
 $(function() {
     GTrack.init({
-        id: 'UA-XXXXXXXX-X',    // Google Analytics id
-        exclude: ''             // jQuery selector to exclude
+        id: 'UA-XXXXXXXX-X',     // Google Analytics id
+        exclude: '',             // Selector to exclude items
+        parseOnInit: true        // Parse the body on init
     });
 });
 ```
 
 ### Methods
 ```javascript
-// Track current location
-GTrack.pageview();
+// Parse anchors in the body or a container (used for AJAX calls for example)
+GTrack.parse();
+GTrack.parse(container);
 
-// Track custom url
+// Track the current or custom location, with optional callback
+GTrack.pageview();
 GTrack.pageview(custom_url, callback);
 
 // Track event with category and action, and optional label, value and callback
 GTrack.event(category, action, label, value, callback);
-
-// Parse items on the page again (used for AJAX calls for example)
-GTrack.parse();
 ```
 
 ### HTML
