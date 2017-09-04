@@ -40,11 +40,12 @@ export function event(category, action, label, value, callback) {
 
 function click(e) {
     if (e.type != 'mousedown' || e.which == 2) {
-        if (e.type != 'mousedown') {
+        let item = $(e.currentTarget);
+
+        if (e.type != 'mousedown' && $._data(e.currentTarget, 'events')[e.type].length == 1) {
             e.preventDefault();
         }
 
-        let item = $(e.currentTarget);
         if (item.is('[data-gtrack-once]')) {
             item.off('mousedown click', click);
         }
@@ -73,11 +74,13 @@ function click(e) {
             }
         }
 
-        if (e.which == 2 || e.ctrlKey || e.metaKey || item.attr('target') == '_blank') {
-            open(url);
-        } else {
-            callback = function() {
-                location = url;
+        if (e.isDefaultPrevented()) {
+            if (e.which == 2 || e.ctrlKey || e.metaKey || item.attr('target') == '_blank') {
+                open(url);
+            } else {
+                callback = function() {
+                    location = url;
+                }
             }
         }
 
