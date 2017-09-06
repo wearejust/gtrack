@@ -4,7 +4,8 @@ let $body = $(document.body);
 let options = {
     id: 'UA-XXXXXXXX-X',
     exclude: '',
-    parseOnInit: true
+    parseOnInit: true,
+    timeout: 1000
 };
 
 export function init(opts) {
@@ -34,8 +35,22 @@ export function pageview(url) {
 export function event(category, action, label, value, callback) {
     ga('send', 'event', category, action, label, value, {
         'transport': 'beacon',
-        'hitCallback': callback
+        'hitCallback': function() {
+            if ($.isFunction(callback)) {
+                callback();
+                callback = null;
+            }
+        }
     });
+
+    if (options.timeout) {
+        setTimeout(function() {
+            if ($.isFunction(callback)) {
+                callback();
+                callback = null;
+            }
+        }, options.timeout);
+    }
 }
 
 function click(e) {
@@ -80,7 +95,7 @@ function click(e) {
             } else {
                 callback = function() {
                     location = url;
-                }
+                };
             }
         }
 

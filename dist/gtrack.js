@@ -2,7 +2,7 @@
 * @wearejust/gtrack 
 * Automatic Google Analytics tracking 
 * 
-* @version 1.0.12 
+* @version 1.0.13 
 * @author Emre Koc <emre.koc@wearejust.com> 
 */
 'use strict';
@@ -29,7 +29,8 @@ var $body = $(document.body);
 var options = {
     id: 'UA-XXXXXXXX-X',
     exclude: '',
-    parseOnInit: true
+    parseOnInit: true,
+    timeout: 1000
 };
 
 function init(opts) {
@@ -59,8 +60,22 @@ function pageview(url) {
 function event(category, action, label, value, callback) {
     ga('send', 'event', category, action, label, value, {
         'transport': 'beacon',
-        'hitCallback': callback
+        'hitCallback': function hitCallback() {
+            if ($.isFunction(callback)) {
+                callback();
+                callback = null;
+            }
+        }
     });
+
+    if (options.timeout) {
+        setTimeout(function () {
+            if ($.isFunction(callback)) {
+                callback();
+                callback = null;
+            }
+        }, options.timeout);
+    }
 }
 
 function click(e) {

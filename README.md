@@ -23,7 +23,8 @@ $(function() {
     GTrack.init({
         id: 'UA-XXXXXXXX-X',     // Google Analytics id
         exclude: '',             // Selector to exclude items
-        parseOnInit: true        // Parse the body on init
+        parseOnInit: true,       // Parse the body on init
+        timeout: 1000            // Timeout in miliseconds (use 0 to disable)
     });
 });
 ```
