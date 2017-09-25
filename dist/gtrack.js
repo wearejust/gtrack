@@ -2,7 +2,7 @@
 * @wearejust/gtrack 
 * Automatic Google Analytics tracking 
 * 
-* @version 1.0.13 
+* @version 1.0.14 
 * @author Emre Koc <emre.koc@wearejust.com> 
 */
 'use strict';
@@ -30,6 +30,7 @@ var options = {
     id: 'UA-XXXXXXXX-X',
     exclude: '',
     parseOnInit: true,
+    removeUtm: true,
     timeout: 1000
 };
 
@@ -39,8 +40,17 @@ function init(opts) {
 
     ga('create', options.id, 'auto');
     ga('set', 'anonymizeIp', true);
-
     pageview();
+
+    if (options.removeUtm && location.search && history.replaceState) {
+        var search = location.search.replace('?', '');
+        search = search.split('&').filter(function (item) {
+            return item.substr(0, 4) == 'utm_' ? null : item;
+        }).join('&');
+        var url = location.href.replace(location.search, (search.length ? '?' : '') + search);
+        history.replaceState({ url: url }, '', url);
+    }
+
     if (options.parseOnInit) {
         parse();
     }
@@ -54,7 +64,10 @@ function parse(container) {
 }
 
 function pageview(url) {
-    ga('send', 'pageview', url || location.pathname);
+    ga('send', 'pageview', {
+        location: location.href,
+        page: url || location.pathname
+    });
 }
 
 function event(category, action, label, value, callback) {

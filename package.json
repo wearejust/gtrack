@@ -1,6 +1,6 @@
 {
     "name": "@wearejust/gtrack",
-    "version": "1.0.13",
+    "version": "1.0.14",
     "description": "Automatic Google Analytics tracking",
     "main": "dist/gtrack.js",
     "license": "MIT",

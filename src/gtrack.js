@@ -5,6 +5,7 @@ let options = {
     id: 'UA-XXXXXXXX-X',
     exclude: '',
     parseOnInit: true,
+    removeUtm: true,
     timeout: 1000
 };
 
@@ -14,8 +15,17 @@ export function init(opts) {
 
     ga('create', options.id, 'auto');
     ga('set', 'anonymizeIp', true);
-
     pageview();
+
+    if (options.removeUtm && location.search && history.replaceState) {
+        let search = location.search.replace('?', '');
+        search = search.split('&').filter(function(item) {
+            return item.substr(0, 4) == 'utm_' ? null : item;
+        }).join('&');
+        let url = location.href.replace(location.search, (search.length ? '?' : '') + search);
+        history.replaceState({ url: url}, '', url);
+    }
+
     if (options.parseOnInit) {
         parse();
     }
@@ -29,7 +39,10 @@ export function parse(container) {
 }
 
 export function pageview(url) {
-    ga('send', 'pageview', url || location.pathname);
+    ga('send', 'pageview', {
+        location: location.href,
+        page: url || location.pathname
+    });
 }
 
 export function event(category, action, label, value, callback) {
