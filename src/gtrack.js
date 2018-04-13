@@ -15,6 +15,14 @@ export function init(opts) {
 
     ga('create', options.id, 'auto');
     ga('set', 'anonymizeIp', true);
+
+    ga(function() {
+        analyticsLoaded();
+    });
+}
+
+export function analyticsLoaded()
+{
     pageview();
 
     if (options.removeUtm && location.search && history.replaceState) {

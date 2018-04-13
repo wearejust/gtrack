@@ -16,6 +16,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 exports.init = init;
+exports.analyticsLoaded = analyticsLoaded;
 exports.parse = parse;
 exports.pageview = pageview;
 exports.event = event;
@@ -40,6 +41,13 @@ function init(opts) {
 
     ga('create', options.id, 'auto');
     ga('set', 'anonymizeIp', true);
+
+    ga(function () {
+        analyticsLoaded();
+    });
+}
+
+function analyticsLoaded() {
     pageview();
 
     if (options.removeUtm && location.search && history.replaceState) {
